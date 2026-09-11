@@ -74,5 +74,4 @@ architecture.
 
 ## License
 
-All rights reserved - see [LICENSE](LICENSE). Use of the compiled plugin is governed
-separately by its End User License Agreement.
+Use of the plugin is governed by its [End User License Agreement](EULA.md).
