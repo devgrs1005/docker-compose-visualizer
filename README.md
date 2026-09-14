@@ -74,4 +74,4 @@ architecture.
 
 ## License
 
-Use of the plugin is governed by its [End User License Agreement](EULA.md).
+Use of the plugin is governed by its [End User License Agreement](https://github.com/devgrs1005/docker-compose-visualizer/wiki/EULA).
