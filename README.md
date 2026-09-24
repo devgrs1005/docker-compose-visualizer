@@ -7,84 +7,57 @@
 
 # Docker Compose Visualizer
 
-A `docker-compose.yml` file is easy to write and hard to read back - `depends_on`
-chains scroll off-screen, networks and volumes are declared far from where they're
-used, and seeing what talks to what means scanning the whole file top to bottom.
-Docker Compose Visualizer renders it as a live, editable diagram instead: service
-cards wired by their real dependencies, updating as you type, editable by clicking
-instead of hand-editing YAML.
+Docker Compose Visualizer turns a `docker-compose.yml` into a live diagram: one card per service, ordered by `depends_on`, with networks, volumes, configs, and secrets summarized below. Problems such as broken or circular dependencies and port conflicts are flagged on the card as you type. Viewing is free. Editing from the diagram requires a license.
 
-![Two-way sync in action](docs/screenshots/demo-sync.gif)
+![Editing a service in the diagram while the YAML updates beside it](docs/screenshots/demo-sync.gif)
 
-`IntelliJ IDEA 2025.2+` · `Community & Ultimate` · `No Docker plugin required`
+**Free to view, license required to edit.** The Architecture canvas, the validation warnings, and the Effective Config view are free. Editing from the diagram requires a license.
 
-**Free to view, license required to edit** - the Architecture canvas and everything on
-it is free, no strings attached. Clicking through to actually change something is the
-paid part.
+**Recognized files:** `compose.yaml`, `compose.yml`, `docker-compose.yml`, `docker-compose.yaml`, and override files such as `compose.override.yaml`. Any other name is recognized when a `COMPOSE_FILE` in a `.env` file above it lists it.
+
+**Documentation:** See the [Documentation page](https://github.com/devgrs1005/docker-compose-visualizer/wiki/Documentation) for how to read the diagram, what each warning means, and how Effective Config works.
 
 ## Free to view
 
-- **See the shape of your stack at a glance** - every service laid out by dependency
-  order, not declaration order, with healthcheck, restart-policy, and mount status
-  visible without opening the file.
-- **Spot dead networks and volumes before they rot** - every network, volume, config,
-  and secret in the file in one place, flagged if nothing actually uses it.
-- **Catches problems before they bite you** - broken or circular service dependencies,
-  two services publishing the same host port, and YAML that doesn't match the shape it
-  expects are all flagged directly on the card, before you'd otherwise notice.
-- **See what Docker actually runs** - the Effective Config view shows the merged result of
-  your base file, override files, files under `include:` and selected profiles, resolved by the
-  real `docker compose config` (Docker must be on your PATH). Each service and resource
-  carries a chip naming the file that defines it. Works with a `COMPOSE_FILE` in `.env` too,
-  so monorepos and non-standard file names are picked up.
-- Also flagged: unrecognized `restart:` policies and `service_healthy` dependencies on a
-  service with no healthcheck.
-- Less common fields - long-form ports, per-network IP and alias settings, and more -
-  are read and shown too, not just the common shorthand.
+- **See your stack at a glance:** Services are ordered by dependency, not declaration order, and each card shows healthcheck, restart-policy, and mount status.
+- **Find unused resources:** Every network, volume, config, and secret is listed in one place, and any that no service uses is flagged.
+- **Catch problems early:** Broken or circular `depends_on`, two services publishing the same host port, and malformed fields are flagged on the card. Unrecognized `restart:` policies and `service_healthy` dependencies on a service without a healthcheck are flagged too.
+- **See what Docker actually runs:** Effective Config shows the merged result of your base file, override files, `include:` files, and selected profiles, resolved by `docker compose config`. Each service and resource shows the file that defines it.
+- **Read less common fields:** Long-form ports, per-network IP and alias settings, and more are shown, not only the common shorthand.
 
 ## Requires a license to edit
 
-- **Edit services without fighting YAML syntax** - a focused form for the fields real
-  compose services use most: image, environment, mounts, dependencies, networks.
-- **Your comments and formatting survive every edit** - changes made in the diagram go
-  straight back into your existing YAML file, not a regenerated copy of it.
-- **Edit the merged result** - in Effective Config, a change is written to whichever file
-  actually defines the value (base, override or included file), not just the one that's open.
-- Add, attach, detach, and delete services, networks, volumes, configs, and secrets
-  straight from the canvas.
-- Scaffold a new Docker Compose file from the IDE's File > New menu.
-- Anything the tailored form doesn't cover stays reachable through a built-in fallback
-  editor, so nothing in your compose file is ever hidden.
-- Confirms before deleting anything still in use, and shows how many services
-  reference it. Blocks duplicate service names, invalid characters, and missing
-  required fields before an edit can be saved.
+- **Edit services in a form:** The edit dialog covers image, environment, mounts, dependencies, and networks.
+- **Keep comments and formatting:** Changes go back into your existing YAML file, and comments and formatting are preserved.
+- **Edit the merged result:** In Effective Config, a change is written to the file that defines the value: the base, an override, or an included file.
+- **Add and remove resources:** Add, attach, detach, and delete services, networks, volumes, configs, and secrets from the canvas.
+- **Create a new file:** Scaffold a new Compose file from File > New.
+- **Edit any field:** A fallback editor reaches the fields the edit dialog does not cover.
+- **Delete safely:** The plugin asks for confirmation before deleting anything still in use and shows how many services reference it. Duplicate service names, invalid characters, and missing required fields are blocked before an edit is saved.
 
 ## Screenshots
 
-**Architecture canvas** - full view of a multi-service stack: cards in dependency
-order, tags, and the resource summary underneath.
+**Architecture canvas:** A multi-service stack with cards in dependency order, tags, and the resource summary underneath.
 
-![Architecture canvas](docs/screenshots/screenshot-architecture.png)
+![Architecture canvas showing service cards in dependency order](docs/screenshots/screenshot-architecture.png)
 
-**Service edit dialog** - the tabbed form open on a service, showing the Environment
-or Mounts tab.
+**Edit dialog:** The tabbed form open on a service, showing the Environment or Mounts tab.
 
-![Service edit dialog](docs/screenshots/screenshot-edit-dialog.png)
+![Edit dialog open on a service](docs/screenshots/screenshot-edit-dialog.png)
 
-**Resource summary + warning** - the networks/volumes/configs/secrets row with an
-unattached-resource warning visible.
+**Resource summary:** The networks, volumes, configs, and secrets row with an unused-resource warning.
 
-![Resource summary](docs/screenshots/screenshot-resources.png)
+![Resource summary with an unused-resource warning](docs/screenshots/screenshot-resources.png)
 
 ## Requirements
 
-- IntelliJ IDEA 2025.2 (build 252) or newer, Community or Ultimate. No Docker plugin
-  required.
+- IntelliJ IDEA 2025.2 (build 252) or newer, Community or Ultimate.
+- The Docker plugin is not needed. The Docker CLI is needed only for Effective Config.
 
 ## Contributing
 
 A sample compose file covering most supported fields is at
-`samples/docker-compose.yml` - open it in the sandbox IDE from `./gradlew runIde` to
+`samples/docker-compose.yml`. Open it in the sandbox IDE from `./gradlew runIde` to
 try things out. See `AGENTS.md` for contributor conventions and the project's
 architecture.
 
