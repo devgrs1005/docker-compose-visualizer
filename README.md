@@ -25,6 +25,13 @@ paid part.
 - **Catches problems before they bite you** - broken or circular service dependencies,
   two services publishing the same host port, and YAML that doesn't match the shape it
   expects are all flagged directly on the card, before you'd otherwise notice.
+- **See what Docker actually runs** - the Effective Config view shows the merged result of
+  your base file, override files, files under `include:` and selected profiles, resolved by the
+  real `docker compose config` (Docker must be on your PATH). Each service and resource
+  carries a chip naming the file that defines it. Works with a `COMPOSE_FILE` in `.env` too,
+  so monorepos and non-standard file names are picked up.
+- Also flagged: unrecognized `restart:` policies and `service_healthy` dependencies on a
+  service with no healthcheck.
 - Less common fields - long-form ports, per-network IP and alias settings, and more -
   are read and shown too, not just the common shorthand.
 
@@ -34,6 +41,8 @@ paid part.
   compose services use most: image, environment, mounts, dependencies, networks.
 - **Your comments and formatting survive every edit** - changes made in the diagram go
   straight back into your existing YAML file, not a regenerated copy of it.
+- **Edit the merged result** - in Effective Config, a change is written to whichever file
+  actually defines the value (base, override or included file), not just the one that's open.
 - Add, attach, detach, and delete services, networks, volumes, configs, and secrets
   straight from the canvas.
 - Scaffold a new Docker Compose file from the IDE's File > New menu.
