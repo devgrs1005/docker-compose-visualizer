@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/logo-dark.svg">
+    <img src="docs/logo.svg" width="96" alt="Docker Compose Visualizer logo">
+  </picture>
+</p>
+
 # Docker Compose Visualizer
 
 A `docker-compose.yml` file is easy to write and hard to read back - `depends_on`
