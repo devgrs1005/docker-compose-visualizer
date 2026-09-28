@@ -22,12 +22,12 @@ Docker Compose Visualizer turns a `docker-compose.yml` into a live diagram: one 
 - **See your stack at a glance:** Services are ordered by dependency, not declaration order, and each card shows healthcheck, restart-policy, and mount status.
 - **Find unused resources:** Every network, volume, config, and secret is listed in one place, and any that no service uses is flagged.
 - **Catch problems early:** Broken or circular `depends_on`, two services publishing the same host port, and malformed fields are flagged on the card. Unrecognized `restart:` policies and `service_healthy` dependencies on a service without a healthcheck are flagged too.
-- **See what Docker actually runs:** Effective Config shows the merged result of your base file, override files, `include:` files, and selected profiles, resolved by `docker compose config`. Each service and resource shows the file that defines it.
+- **See what Docker actually runs:** Effective Config shows the merged result of your base file, override files, `include:` files, and selected profiles, resolved by `docker compose config`. Every resolved value - not just each service or resource - shows a chip naming the file that supplies it, with a note for what it replaced.
 - **Read less common fields:** Long-form ports, per-network IP and alias settings, and more are shown, not only the common shorthand.
 
 ## Requires a license to edit
 
-- **Edit services in a form:** The edit dialog covers image, environment, mounts, dependencies, and networks.
+- **Edit services in a form:** A tabbed dialog (General, Environment, Mounts, Connections, Runtime) covers image, environment, mounts, dependencies, networks, healthcheck, resource limits, and profiles. In Effective Config, each field shows a chip naming the file it saves to, and greyed rows for values another file already supplies.
 - **Keep comments and formatting:** Changes go back into your existing YAML file, and comments and formatting are preserved.
 - **Edit the merged result:** In Effective Config, a change is written to the file that defines the value: the base, an override, or an included file.
 - **Add and remove resources:** Add, attach, detach, and delete services, networks, volumes, configs, and secrets from the canvas.
