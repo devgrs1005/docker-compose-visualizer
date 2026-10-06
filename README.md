@@ -15,7 +15,7 @@ See how your Docker Compose setup fits together at a glance. Open a Compose file
 
 **Documentation:** See the [Documentation page](https://github.com/devgrs1005/docker-compose-visualizer/wiki/Documentation) for how to read the diagram, what each warning means, and how Effective Config works.
 
-## What you get for free
+## Free features
 
 - **See your stack at a glance:** Choose Compact cards for the essentials or Full cards for every port, mount and warning. Ports published to your machine are marked on the card.
 - **Look closer in a side panel:** Select a service to see all its settings next to the diagram.
@@ -23,7 +23,7 @@ See how your Docker Compose setup fits together at a glance. Open a Compose file
 - **Find what is not used:** Networks, volumes, configs and secrets that no service uses are listed and flagged.
 - **Make sense of several files:** Switch to the combined view (Effective Config) to see your base file, override files, included files and chosen profiles put together, as Docker sees them. Each setting says which file it comes from; the label is left out when it is the file you have open.
 
-## What a license adds
+## Licensed features
 
 - **Edit in the side panel:** Change a service's settings in a panel next to the diagram, then Save or Revert. You can resize or collapse it, and add settings the file does not have yet with "Add property".
 - **One-click fixes:** Press Alt+Enter on an underlined problem in your file to fix common ones, such as a missing dependency, an invalid restart policy, or a wait for a healthy service that has no healthcheck.
